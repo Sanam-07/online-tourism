@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 error_reporting(0);
@@ -29,70 +30,71 @@ include('includes/config.php');
 </head>
 <body>
 <?php include('includes/header.php');?>
-<!--- banner ---->
+
 <div class="banner-3">
 	<div class="container">
 		<h1 class="wow zoomIn animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;"> TTMS- Package List</h1>
 	</div>
 </div>
-<!--- /banner ---->
-<!--- rooms ---->
-<div class="rooms">
-	<div class="container">
-		
-		<div class="room-bottom">
-		<?php include_once('includes/searchBar.php')?>
 
-					
-<?php $sql = "SELECT * from tbltourpackages order by rand() limit 5";
-$query = $dbh->prepare($sql);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-$cnt=1;
-if($query->rowCount() > 0)
-{
+
+
+<?php
+if(isset($_GET['q'])){
+    $parma = $_GET['q'];
+    $results =  searchThis('tbltourpackages', $parma);
+
+}
 foreach($results as $result)
-{	?>
+{
+    
+    ?>
 			<div class="rom-btm">
 				<div class="col-md-3 room-left wow fadeInLeft animated" data-wow-delay=".5s">
-					<img src="admin/pacakgeimages/<?php echo htmlentities($result->PackageImage);?>" class="img-responsive" alt="">
+					<img src="admin/pacakgeimages/<?php echo $result['PackageImage'];?>" class="img-responsive" alt="">
 				</div>
 				<div class="col-md-6 room-midle wow fadeInUp animated" data-wow-delay=".5s">
-					<h4>Package Name: <?php echo htmlentities($result->PackageName);?></h4>
-					<h6>Package Type : <?php echo htmlentities($result->PackageType);?></h6>
-					<p><b>Package Location :</b> <?php echo htmlentities($result->PackageLocation);?></p>
-					<p><b>Features</b> <?php echo htmlentities($result->PackageFetures);?></p>
+					<h4>Package Name: <?php echo $result['PackageName'];?></h4>
+					<h6>Package Type : <?php echo $result['PackageType'];?></h6>
+					<p><b>Package Location :</b> <?php echo $result['PackageLocation']?></p>
+					<p><b>Features</b> <?php echo $result['PackageFetures']?></p>
 				</div>
 				<div class="col-md-3 room-right wow fadeInRight animated" data-wow-delay=".5s">
-					<h5>USD <?php echo htmlentities($result->PackagePrice);?></h5>
-					<a href="package-details.php?pkgid=<?php echo htmlentities($result->PackageId);?>" class="view">Details</a>
+					<h5>USD <?php echo $result['PackagePrice']?></h5>
+					<a href="package-details.php?pkgid=<?php echo $result['PackageId']?>" class="view">Details</a>
 				</div>
 				<div class="clearfix"></div>
 			</div>
 
-<?php }} ?>
-<div><a href="package-list.php" class="view">View More Packages</a></div>
-</div>
-			<div class="clearfix"></div>
-	</div>
-			
-		
-		
-		</div>
-	</div>
-</div>
-<!--- /rooms ---->
+<?php } ?>
 
-<!--- /footer-top ---->
-<?php include('includes/footer.php');?>
-<!-- signup -->
-<?php include('includes/signup.php');?>			
-<!-- //signu -->
-<!-- signin -->
-<?php include('includes/signin.php');?>			
-<!-- //signin -->
-<!-- write us -->
-<?php include('includes/write-us.php');?>			
-<!-- //write us -->
-</body>
-</html>
+<table>
+    <thead>
+        <tr>
+            <td>#</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+</table>
+
+
+
+
+
+
+<?php
+
+function searchThis($table, $thingy){
+    $query = "SELECT * from $table where PackageName like '%$thingy%' OR PackageLocation like '%$thingy%'";
+    // echo $query;
+    $conn = new mysqli('localhost', 'root', '', 'tms');
+    $result =  $conn->query($query);
+    $data = array();
+    while($row = $result->fetch_assoc()) {
+        $data[] = $row;
+      }
+    return $data;
+}
+?>

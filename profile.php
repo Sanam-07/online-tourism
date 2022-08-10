@@ -72,7 +72,7 @@ $msg="Profile Updated Successfully";
 <?php include('includes/header.php');?>
 <div class="banner-1 ">
 	<div class="container">
-		<h1 class="wow zoomIn animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">TTTTTTTTTTMS-Tourism Management System</h1>
+		<h1 class="wow zoomIn animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">TTMS-Travel and Tourism Management System</h1>
 	</div>
 </div>
 <!--- /banner-1 ---->
@@ -123,7 +123,7 @@ foreach($results as $result)
 <?php }} ?>
 
 			<p style="width: 350px;">
-<button type="submit" name="submit6" class="btn-primary btn">Updtae</button>
+<button type="submit" name="submit6" class="btn-primary btn">Update</button>
 			</p>
 			</form>
 

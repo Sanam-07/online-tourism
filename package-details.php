@@ -127,12 +127,7 @@ foreach($results as $result)
 				<input class="date" id="datepicker1" type="text" placeholder="dd-mm-yyyy" name="todate" required="">
 			</div>
 			</div>
-						<div class="clearfix"></div>
-				<div class="grand">
-					<p>Grand Total</p>
-					<h3>USD.800</h3>
-				</div>
-			</div>
+	
 		<h3>Package Details</h3>
 				<p style="padding-top: 1%"><?php echo htmlentities($result->PackageDetails);?> </p>	
 				<div class="clearfix"></div>

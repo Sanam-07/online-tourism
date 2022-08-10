@@ -89,10 +89,10 @@ include('includes/config.php');
 
 
 	
-	<h3>Package List</h3>
+	<h3>Top Package</h3>
 
 					
-<?php $sql = "SELECT * from tbltourpackages order by rand() limit 4";
+<?php $sql = "SELECT * from tbltourpackages order by rand() limit 8";
 $query = $dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -121,10 +121,6 @@ foreach($results as $result)
 <?php }} ?>
 			
 		
-<div><a href="package-list.php" class="view">View More Packages</a></div>
-</div>
-			<div class="clearfix"></div>
-	</div>
 
 
 
@@ -156,7 +152,7 @@ foreach($results as $result)
 				<a href="#"><i class="fa fa-ticket"></i></a>
 			</div>
 			<div class="rou-rgt">
-				<h3>7,00,00,000+</h3>
+				<h3>7,00+</h3>
 				<p>Booking</p>
 			</div>
 				<div class="clearfix"></div>
